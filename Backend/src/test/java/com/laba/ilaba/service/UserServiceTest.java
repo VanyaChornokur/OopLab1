@@ -143,7 +143,7 @@ class UserServiceTest {
         String hashedPassword = "hashedPassword";
         String token = "jwt.token.here";
 
-        SignupRequest signupRequest = new SignupRequest(email, password);
+        SignupRequest signupRequest = new SignupRequest("new_user",email, password);
 
         when(userRepository.existsByEmail(email)).thenReturn(false);
         when(passwordService.hashPassword(password)).thenReturn(hashedPassword);
@@ -169,7 +169,7 @@ class UserServiceTest {
     void signup_shouldThrowBadRequestException_whenEmailAlreadyExists() {
         // Arrange
         String email = "existing@example.com";
-        SignupRequest signupRequest = new SignupRequest(email, "password");
+        SignupRequest signupRequest = new SignupRequest("new_user",email, "password");
 
         when(userRepository.existsByEmail(email)).thenReturn(true);
 
